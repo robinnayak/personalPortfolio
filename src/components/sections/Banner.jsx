@@ -36,7 +36,7 @@ const Banner = ({ bg_color }) => {
           I'm a web developer passionate about turning ideas into solutions for
           real-world problems.
         </p>
-        <div className="mt-10 drop-shadow-md items-center">
+        <div className="mt-10  drop-shadow-md items-center">
           <Link
             to="contact"
             className="text-light text-xl md:text-2xl font-bold border-2 rounded-full p-3 text-center  hover:bg-secondary mr-3 cursor-pointer"

@@ -1,5 +1,5 @@
 import React from "react";
-import AboutProfile from "../../assests/eurekatower1.JPG";
+import AboutProfile from "../../assests/imageflip.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,

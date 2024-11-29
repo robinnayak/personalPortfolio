@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import emailjs from "emailjs-com";
-import FBProfile from "../../assests/fbProfile.jpeg";
+import { Player } from "@lottiefiles/react-lottie-player"; // Lottie-react alternative
+import contactAnimation from "../../assests/contact-lattie.json";
 
 const ContactForm = ({ bg_color }) => {
   const [formData, setFormData] = useState({
@@ -25,45 +25,19 @@ const ContactForm = ({ bg_color }) => {
     setShowFlash(true);
     setFormData({ name: "", email: "", message: "" });
     setTimeout(() => setShowFlash(false), 5000);
-
-    // emailjs
-    //   .send(
-    //     process.env.REACT_APP_EMAIL_SERVICE_ID, // Access Service ID from .env
-    //     process.env.REACT_APP_EMAIL_TEMPLATE_ID, // Access Template ID from .env
-    //     {
-    //       name: formData.name,
-    //       email: formData.email,
-    //       message: formData.message,
-    //     },
-    //     process.env.REACT_APP_EMAIL_PUBLIC_KEY // Access Public Key from .env
-    //   )
-    //   .then(
-    //     (result) => {
-    //       console.log("Email sent successfully:", result.text);
-    //       setResponseMessage("Your email has been sent!");
-    //       setShowFlash(true);
-    //       setFormData({ name: "", email: "", message: "" });
-    //       setTimeout(() => setShowFlash(false), 3000);
-    //     },
-    //     (error) => {
-    //       console.error("Error sending email:", error.text);
-    //       setResponseMessage("An error occurred while sending your email.");
-    //       setShowFlash(true);
-    //       setTimeout(() => setShowFlash(false), 3000);
-    //     }
-    //   );
   };
 
   return (
     <div
       className={`max-w-full mx-auto p-6 ${bg_color} shadow-lg rounded-lg flex flex-col md:flex-row items-center gap-8 mb-5`}
     >
-      {/* Image Section */}
+      {/* Lottie Animation Section */}
       <div className="w-full md:w-1/2 flex justify-center">
-        <img
-          src={FBProfile}
-          alt="Robin Nayak"
-          className="rounded-lg shadow-lg max-h-[400px] object-cover"
+        <Player
+          autoplay
+          loop
+          src={contactAnimation}
+          style={{ height: "400px", width: "400px" }}
         />
       </div>
 
@@ -77,8 +51,7 @@ const ContactForm = ({ bg_color }) => {
         </h1>
         <p className="text-light mb-6">
           Thank you for visiting Robin Nayak's portfolio! Please fill out the
-          contact form below to get in touch with Robin Nayak for any inquiries,
-          collaborations, or feedback.
+          contact form below to get in touch for any inquiries, collaborations, or feedback.
         </p>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

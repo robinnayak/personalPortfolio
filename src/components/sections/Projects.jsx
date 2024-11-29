@@ -97,7 +97,7 @@ const Projects = ({ bg_color }) => {
           </div>
         ))}
       </div>
-      {selectedProject !== null && (
+      {/* {selectedProject !== null && (
         <div
           className="backdrop-blur-sm bg-gray-800 bg-opacity-30 fixed inset-0 flex items-center justify-center z-50"
           onClick={() => setSelectedProject(null)}
@@ -115,7 +115,7 @@ const Projects = ({ bg_color }) => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
