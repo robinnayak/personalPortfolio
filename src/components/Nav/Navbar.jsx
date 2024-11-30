@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeather } from "@fortawesome/free-solid-svg-icons"; // Example icon
+import { faFeather, faLightbulb } from "@fortawesome/free-solid-svg-icons"; // Example icon
 // import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
 
@@ -54,9 +54,9 @@ const Navbar = () => {
         <div className="md:hidden text-light">
           <button onClick={toggleMenu}>
             <FontAwesomeIcon
-              icon={faFeather}
+              icon={faLightbulb}
               size="2x"
-              className={`text-light ${!isMenuOpen ? "animate-bounce" : ""}`}
+              className={`text-orange-300 ${!isMenuOpen ? "animate-bounce" : ""}`}
             />
           </button>
         </div>
