@@ -4,7 +4,7 @@ import BannerProfile from "../../assests/upscaledimage.png";
 import CV from "../../assests/CV.pdf"
 const Banner = ({ bg_color }) => {
   return (
-    <div className="container rounded-b-2xl min-h-[75vh] max-w-full flex justify-around flex-wrap bg-gradient-to-r from-blue-300 to-black relative overflow-hidden mb-5 items-center ">
+    <div className="container rounded-b-2xl min-h-[75vh] max-w-full flex justify-around flex-wrap bg-gradient-to-r from-blue-300 to-black relative overflow-hidden mb-5 items-center mt-14 ">
       {/* Image with Magical Lighting Frame */}
       <div className="relative top-10">
         {/* 3D Shadow and Magical Glow */}
