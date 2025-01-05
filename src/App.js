@@ -8,6 +8,7 @@ import Navbar from "./components/Nav/Navbar";
 import Footer from "./components/footer/Footer";
 import About from "./components/sections/About";
 import ChatBot from "./components/ChatBot";
+import AIGame from "./components/Game/AIGame";
 
 function App() {
   return (
@@ -16,7 +17,27 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <AnimatePresence mode="wait">
-            <NavApp />
+            <main className="pt-16"> {/* Added padding-top to account for fixed navbar */}
+              <Routes>
+                <Route path="/" element={
+                  <>
+                    <Home />
+                  </>
+                } />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/game" element={
+                  <div className="container mx-auto px-4 py-8">
+                    <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+                      Play with AI
+                    </h1>
+                    <div className="max-w-2xl mx-auto">
+                      <AIGame />
+                    </div>
+                  </div>
+                } />
+              </Routes>
+            </main>
           </AnimatePresence>
           <ChatBot />
           <Footer />
@@ -27,14 +48,3 @@ function App() {
 }
 
 export default App;
-
-const NavApp = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/banner" element={<Banner />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
-  );
-};

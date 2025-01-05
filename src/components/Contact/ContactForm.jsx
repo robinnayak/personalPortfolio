@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
 import { useTheme } from '../../context/ThemeContext';
@@ -12,20 +12,24 @@ const ContactForm = () => {
   const [status, setStatus] = useState('');
   const { isDarkMode } = useTheme();
 
+  useEffect(() => {
+    emailjs.init(process.env.REACT_APP_EMAIL_PUBLIC_KEY);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
 
     try {
       await emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        process.env.REACT_APP_EMAIL_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
         {
           from_name: formData.name,
           from_email: formData.email,
           message: formData.message,
         },
-        process.env.REACT_APP_EMAILJS_USER_ID
+        process.env.REACT_APP_EMAIL_PUBLIC_KEY
       );
 
       setStatus('success');
