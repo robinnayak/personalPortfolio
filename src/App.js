@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "./context/ThemeContext";
-import Banner from "./components/sections/Banner";
 import Contact from "./components/sections/Contact";
 import Home from "./components/sections/Home";
 import Navbar from "./components/Nav/Navbar";
@@ -17,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <AnimatePresence mode="wait">
-            <main className="pt-16"> {/* Added padding-top to account for fixed navbar */}
+            <main className="pt-16">
               <Routes>
                 <Route path="/" element={
                   <>
