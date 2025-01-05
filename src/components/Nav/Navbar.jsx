@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeather, faLightbulb } from "@fortawesome/free-solid-svg-icons"; // Example icon
-// import { NavLink } from "react-router-dom";
+import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-scroll";
+import { motion } from "framer-motion";
+import ThemeToggle from "../ThemeToggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +16,6 @@ const Navbar = () => {
     { name: "Home", path: "banner" },
     { name: "Education", path: "education" },
     { name: "Skills", path: "skills" },
-    // { name: "Soft Skills", path: "soft-skills" },
     { name: "Projects", path: "projects" },
     { name: "About", path: "about" },
     { name: "Interested Fields", path: "intrested-fields" },
@@ -23,69 +23,95 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-300 to-black p-4 mb-0.5 shadow-sm shadow-white z-50">
-      <div className="container flex justify-between mx-auto items-center">
-        {/* Logo Section */}
-        <div className="flex items-center">
-          <FontAwesomeIcon
-            icon={faFeather}
-            size="2xl"
-            className="text-light animate-bounce"
-          />
-          <h2 className="text-2xl font-bold text-light mx-2">Robin</h2>
-        </div>
-
-        {/* Nav Links for Larger Screens */}
-        <div className="hidden md:flex space-x-6">
-          {linksname.map((link, index) => (
-            <Link
-              to={link.path}
-              key={index}
-              smooth={true}
-              duration={500}
-              className="text-white hover:text-yellow-400 cursor-pointer"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile Menu Toggle Button */}
-        <div className="md:hidden text-light">
-          <button onClick={toggleMenu}>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-lg z-50"
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo Section */}
+          <motion.div 
+            className="flex items-center space-x-2"
+            whileHover={{ scale: 1.05 }}
+          >
             <FontAwesomeIcon
-              icon={faLightbulb}
-              size="2x"
-              className={`text-orange-300 ${!isMenuOpen ? "animate-bounce" : ""}`}
+              icon={faFeather}
+              className="h-6 w-6 text-primary-500 dark:text-primary-400"
             />
-          </button>
-        </div>
-      </div>
+            <span className="text-xl font-bold text-gray-900 dark:text-white">Robin</span>
+          </motion.div>
 
-      {/* Mobile Menu Links */}
-      {isMenuOpen && (
-        <div
-          className={`md:hidden flex flex-col mt-4 space-y-2 bg-gradient-to-r from-blue-300 to-black p-4 rounded-lg transition-all duration-500 ease-in-out ${
-            isMenuOpen
-              ? "max-h-screen opacity-100"
-              : "max-h-0 overflow-hidden opacity-0"
-          } shadow-md`}
-        >
-          {linksname.map((link, index) => (
-            <Link
-              to={link.path}
-              key={index}
-              smooth={true}
-              duration={500}
-              className="text-light hover:text-secondary transition-all duration-300 cursor-pointer"
-              onClick={() => setIsMenuOpen(false)} // Close menu on click
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {linksname.map((link, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  to={link.path}
+                  smooth={true}
+                  duration={500}
+                  className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
+            ))}
+            <ThemeToggle />
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
+            <button
+              onClick={toggleMenu}
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400"
             >
-              {link.name}
-            </Link>
-          ))}
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={false}
+          animate={{ height: isMenuOpen ? "auto" : 0 }}
+          className={`md:hidden overflow-hidden ${isMenuOpen ? "border-t dark:border-gray-700" : ""}`}
+        >
+          <div className="py-3 space-y-3">
+            {linksname.map((link, index) => (
+              <Link
+                key={index}
+                to={link.path}
+                smooth={true}
+                duration={500}
+                className="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </motion.nav>
   );
 };
 
