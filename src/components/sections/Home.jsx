@@ -6,8 +6,8 @@ import Skills from "./Skills";
 import SoftSkills from "./SoftSkills";
 import Projects from "./Projects";
 import About from "./About";
-import IntrestedFields from "./IntrestedFields";
 import Contact from "./Contact";
+import FeaturedSections from "./Feature";
 
 const Home = () => {
   const bg_color_for_tailwind = "bg-gradient-to-r from-blue-300 to-black";
@@ -22,6 +22,9 @@ const Home = () => {
       <div id="skills">
         <Skills bg_color={bg_color_for_tailwind} />
       </div>
+      <div className="mb-5" id="featured-sections">
+        <FeaturedSections bg_color={bg_color_for_tailwind} />
+      </div>
       <div id="soft-skills">
         <SoftSkills bg_color={bg_color_for_tailwind} />
       </div>
@@ -31,9 +34,7 @@ const Home = () => {
       <div id="about">
         <About bg_color={bg_color_for_tailwind} />
       </div>
-      <div id="intrested-fields">
-        <IntrestedFields bg_color={bg_color_for_tailwind} />
-      </div>
+
       <div id="contact">
         <Contact bg_color={bg_color_for_tailwind} />
       </div>

@@ -18,30 +18,36 @@ function App() {
           <AnimatePresence mode="wait">
             <main className="pt-16">
               <Routes>
-                <Route path="/" element={
-                  <>
-                    <Home />
-                  </>
-                } />
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <Home />
+                    </>
+                  }
+                />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/game" element={
-                  <div className="container mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-                      Play with AI
-                    </h1>
-                    <div className="max-w-2xl mx-auto">
-                      <AIGame />
+                <Route
+                  path="/game"
+                  element={
+                    <div className="container mx-auto px-4 py-8">
+                      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+                        Play with AI
+                      </h1>
+                      <div className="max-w-2xl mx-auto">
+                        <AIGame />
+                      </div>
                     </div>
-                  </div>
-                } />
+                  }
+                />
               </Routes>
             </main>
           </AnimatePresence>
           <ChatBot />
-          <Footer />
         </BrowserRouter>
       </div>
+      <Footer />
     </ThemeProvider>
   );
 }

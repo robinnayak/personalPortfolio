@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
   const location = useLocation();
-
+  
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },

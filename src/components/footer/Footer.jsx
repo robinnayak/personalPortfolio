@@ -4,7 +4,7 @@ import { faLinkedin, faGithub, faTwitter } from "@fortawesome/free-brands-svg-ic
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-blue-300 to-black text-light py-6 mb-1">
+    <footer className="relative bottom-0 w-full bg-gradient-to-r from-blue-300 to-black text-light py-6 mb-1">
       <div className="max-w-full mx-auto px-4 flex flex-col justify-center items-center">
         {/* Left Section: Copyright */}
         <div className="text-center md:text-left">
