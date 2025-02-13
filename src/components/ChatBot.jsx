@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
+// import { useTheme } from '../context/ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
-// Predefined prompts that users can click
+// predefined prompts with Google Project
 const predefinedPrompts = [
   { text: "👋 Say Hello", value: "Hello" },
-  { text: "💼 View Projects", value: "What projects have you worked on?" },
-  { text: "🛠 Technical Skills", value: "What are your technical skills?" },
-  { text: "📧 Contact Info", value: "How can I contact you?" },
-  { text: "👤 About You", value: "Tell me about yourself" }
+  { text: "💻 My Projects", value: "Show me your projects" },
+  { text: "🛠 Tech Stack", value: "What technologies do you use?" },
+  { text: "📈 SEO Experience", value: "Tell me about your SEO work" },
+  { text: "📱 Contact Info", value: "How can I contact you?" },
+  { text: "👤 About Me", value: "Tell me about yourself" }
 ];
 
-// Simple responses for each category
+
 const responses = {
   hello: {
     patterns: ['hello', 'hi', 'hey', 'greetings'],
@@ -19,19 +22,54 @@ const responses = {
   },
   projects: {
     patterns: ['project', 'work', 'portfolio', 'built'],
-    response: "I've worked on several projects including:\n• Web applications using React.js\n• E-commerce platforms\n• Portfolio websites\n• AI-based applications\nWhich one would you like to know more about?"
+    response: `Featured Projects:
+• Robin SPT - Personal portfolio (React JS)
+  🌐 https://robinspt.com/
+
+• Movies HD Now Hub - Movie streaming platform
+  🌐 https://moviesnowhdhub.robinspt.com/
+
+• Meme Generator - Creative meme creation tool
+  🌐 https://memegen.robinnayak.com.np/
+
+• Granny's and Mom's Kitchen - Recipe sharing platform
+  🛠 React JS & Django
+
+• Room Rent Finder - Kathmandu rental solution
+  🛠 React JS & Django | 🚀 Hosted on Railway & Vercel
+
+• Summit Hospital - Healthcare UI design
+
+• Disha - Vehicle booking app
+  📱 React Native & Django`
   },
   skills: {
     patterns: ['skills', 'technical', 'technologies', 'tech stack'],
-    response: "My technical skills include:\n• Frontend: React.js, JavaScript, HTML/CSS\n• Backend: Node.js, Express\n• Database: MongoDB, MySQL\n• Tools: Git, VS Code\nWould you like specific details about any of these?"
+    response: `Technical Skills:
+• Frontend: React JS, HTML5, CSS3, JavaScript
+• Mobile: React Native
+• Backend: Django, Python
+• Databases: PostgreSQL, SQLite
+• DevOps: Railway, Vercel
+• SEO & Analytics: Google Analytics, Search Console
+• Tools: Git, VS Code, Postman`
   },
   contact: {
     patterns: ['contact', 'email', 'reach', 'connect'],
-    response: "You can reach me through:\n• Email: [your-email]\n• LinkedIn: [your-linkedin]\n• Or use the contact form on this website!"
+    response: `Contact Details:
+📧 Email: robinnayak86@gmail.com
+📱 WhatsApp: +977 9815823670
+🔗 LinkedIn: https://www.linkedin.com/in/robin-nayak-1093371b6/`
   },
   about: {
     patterns: ['about', 'yourself', 'background', 'who'],
-    response: "I'm a Full Stack Developer passionate about creating web applications. I specialize in React.js and modern web technologies. Would you like to know more about my experience or projects?"
+    response: `Professional Background:
+• 3-month SEO internship at Oreon (London-based)
+• Specialized in web development with React & Django
+• Experienced in full-stack development
+• Proficient in SEO optimization
+• Skilled in Google Analytics implementation
+• Focused on building user-centric applications`
   },
   error: {
     response: "I'm having trouble understanding that. Please try clicking one of the suggestion buttons below or rephrase your question."
@@ -61,7 +99,7 @@ const ChatBot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
-  const { isDarkMode } = useTheme();
+  // const { isDarkMode } = useTheme();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -108,10 +146,10 @@ const ChatBot = () => {
   return (
     <>
       <motion.button
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 p-4 rounded-full shadow-lg bg-blue-600 dark:bg-blue-500 text-white z-50"
+        className="fixed bottom-4 right-4 p-4 rounded-full shadow-xl bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 text-white z-50 hover:shadow-2xl transition-all duration-300"
       >
         {isOpen ? '×' : '💬'}
       </motion.button>
@@ -119,45 +157,61 @@ const ChatBot = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-20 right-4 w-80 h-[500px] rounded-lg shadow-xl overflow-hidden z-50 bg-white dark:bg-gray-800"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-20 right-4 w-80 h-[500px] rounded-xl shadow-2xl overflow-hidden z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
           >
-            <div className="p-4 bg-blue-600 dark:bg-gray-700 text-white">
-              <h3 className="font-bold">Portfolio Assistant</h3>
+            <div className="p-4 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-700 dark:to-gray-800 text-white">
+              <h3 className="font-bold text-lg">Robin's AI Assistant</h3>
             </div>
 
-            <div className="h-[340px] overflow-y-auto p-4">
+            <div className="h-[340px] overflow-y-auto p-4 space-y-4">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`mb-4 ${message.isBot ? 'text-left' : 'text-right'}`}
+                  className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
                 >
-                  <span
-                    className={`inline-block p-2 rounded-lg whitespace-pre-wrap ${
+                  <div
+                    className={`max-w-[80%] p-3 rounded-2xl ${
                       message.isBot
-                        ? 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100'
                         : 'bg-blue-500 text-white'
-                    }`}
+                    } ${
+                      !message.isBot ? 'rounded-br-none' : 'rounded-bl-none'
+                    } shadow-sm`}
                   >
-                    {message.text}
-                  </span>
+                    {message.text.split('\n').map((line, i) => (
+                      <p key={i} className="mb-2 last:mb-0">
+                        {line}
+                        {line.includes('LinkedIn') && (
+                          <a
+                            href="https://www.linkedin.com/in/robin-nayak-1093371b6/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-2 text-blue-500 hover:text-blue-400 dark:text-blue-300"
+                          >
+                            <FontAwesomeIcon icon={faLinkedin} className="h-4 w-4 inline" />
+                          </a>
+                        )}
+                      </p>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
               <div ref={messagesEndRef} />
             </div>
 
             {/* Predefined prompts */}
-            <div className="p-2 border-t dark:border-gray-700 max-h-[80px] overflow-y-auto">
+            <div className="p-2 border-t dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
               <div className="flex flex-wrap gap-2">
                 {predefinedPrompts.map((prompt, index) => (
                   <button
                     key={index}
                     onClick={() => handlePromptClick(prompt.value)}
-                    className="text-sm px-3 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md"
                   >
                     {prompt.text}
                   </button>
@@ -165,20 +219,20 @@ const ChatBot = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-4 border-t dark:border-gray-700">
+            <form onSubmit={handleSubmit} className="p-4 border-t dark:border-gray-700 bg-white dark:bg-gray-800">
               <div className="flex space-x-2">
                 <input
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 p-2 rounded-md border dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="flex-1 p-2 rounded-lg border dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="px-4 py-2 rounded-md bg-blue-600 dark:bg-blue-500 text-white"
+                  className="px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-md"
                 >
                   Send
                 </motion.button>
